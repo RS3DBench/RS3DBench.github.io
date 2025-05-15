@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>RS3DBench: A Comprehensive Benchmark for 3D Spatial Perception in Remote Sensing</title>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
+            background: #fff;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 24px 40px 24px;
+        }
+
+        .title {
+            font-size: 2.7em;
+            font-weight: bold;
+            margin-top: 48px;
+            margin-bottom: 0.5em;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 18px 0 10px 0;
+            color: #222;
+        }
+
+        .authors {
+            margin: 10px 0 0 0;
+            color: #337ab7;
+            font-size: 1.1em;
+        }
+
+        .affiliation {
+            color: #666;
+            margin-bottom: 18px;
+            font-size: 1em;
+        }
+
+        .button-group {
+            margin: 24px 0 32px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .custom-btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 2em;
+            padding: 0.7em 1.6em;
+            font-size: 1.15em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.7em;
+            font-family: inherit;
+            font-weight: 500;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: none;
+        }
+
+        .custom-btn .fa-solid,
+        .custom-btn .fa-brands,
+        .custom-btn .fa-regular {
+            font-size: 1.2em;
+        }
+
+        .custom-btn.paper {
+            background: #333;
+        }
+
+        .custom-btn.code {
+            background: #333;
+        }
+
+        .custom-btn.demo {
+            background: #222;
+        }
+
+        .custom-btn.tutorial {
+            background: #222;
+        }
+
+        .custom-btn.colab {
+            background: #333;
+        }
+
+        .custom-btn:hover {
+            background: #222;
+        }
+
+        .star-count {
+            background: #222;
+            color: #fff;
+            border-radius: 0.7em;
+            padding: 0.1em 0.6em;
+            font-size: 0.95em;
+            margin: 0 0.2em;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+        }
+
+        .button-group button {
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 22px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .button-group button.paper {
+            background: #222;
+        }
+
+        .button-group button.code {
+            background: #222;
+        }
+
+        .button-group button.demo {
+            background: #222;
+            color: #fff;
+        }
+
+        .button-group button.tutorial {
+            background: #222;
+            color: #fff;
+        }
+
+        .button-group button.colab {
+            background: #222;
+        }
+
+        .button-group button:hover {
+            opacity: 0.85;
+        }
+
+        .img-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            justify-content: center;
+            margin: 32px 0 18px 0;
+        }
+
+        .img-grid img {
+            width: 100%;
+            aspect-ratio: 1.2/1;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #eee;
+        }
+
+        .arrow-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 60px;
+            margin: 0 0 0 0;
+            min-height: 40px;
+        }
+
+        .arrow {
+            font-size: 2.5em;
+            color: #d33;
+            margin: 0 10px;
+            user-select: none;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 40px;
+            margin-top: 18px;
+        }
+
+        .bottom-section img {
+            width: 180px;
+            border-radius: 8px;
+            background: #eee;
+        }
+
+        @media (max-width: 1000px) {
+            .container {
+                max-width: 98vw;
+            }
+
+            .img-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .bottom-section img {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 4vw 24px 4vw;
+            }
+
+            .title {
+                font-size: 2em;
+            }
+
+            .img-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bottom-section img {
+                width: 80px;
+            }
+
+            .arrow-row {
+                gap: 20px;
+            }
+        }
+
+        .img-compare-container {
+            position: relative;
+            width: 100px; /* 同样写成图片实际宽度 */
+            height: 100px; /* 图片实际高度 */
+            overflow: hidden;
+        }
+
+        .img-compare-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 不设 width/height，让它按照图片原始像素渲染 */
+        }
+
+        /* 悬停遮罩层 */
+        .img-compare-container::after {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.28);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+            z-index: 20;
+        }
+        .img-compare-container:hover::after {
+            opacity: 1;
+        }
+
+
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* 按钮容器 */
+        .twentytwenty-handle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 2.5px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 12px 0 rgba(60,60,60,0.18);
+    cursor: ew-resize;
+    z-index: 40;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.twentytwenty-handle:hover {
+    border: 2.5px solid #bbb;
+    box-shadow: 0 4px 18px 0 rgba(60,60,60,0.22);
+}
+
+/* 上下延伸的细线 */
+.twentytwenty-handle:before,
+.twentytwenty-handle:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 9999px;
+    background: #fff;
+    transform: translateX(-50%);
+    z-index: -1;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
+
+.twentytwenty-handle:before {
+    top: -9999px;
+    bottom: 50%;
+}
+
+.twentytwenty-handle:after {
+    bottom: -9999px;
+    top: 50%;
+}
+
+/* 左右箭头样式 */
+.twentytwenty-left-arrow,
+.twentytwenty-right-arrow {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    margin-top: -10px;
+    border: 10px solid transparent;
+    z-index: 2;
+}
+
+.twentytwenty-left-arrow {
+    /* 朝右的白色三角 */
+    border-left: 0;
+    border-right: 16px solid #fff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    left: 8px;
+}
+
+.twentytwenty-right-arrow {
+    /* 朝左的白色三角 */
+    border-right: 0;
+    border-left: 16px solid #fff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    right: 8px;
+}
+
+        /* 去除中心点 */
+
+        /* —— 左右标签 —— */
+        .img-compare-container .label {
+    position: absolute;
+    top: 45%;
+    padding: 9px 18px;
+    background: rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 400;
+    border-radius: 3px;
+    border: 1.2px solid transparent;
+    letter-spacing: 1.2px;
+    text-transform: none;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s, left 0.2s, right 0.2s;
+    z-index: 35;
+    box-shadow: 0 2px 8px 0 rgba(80,80,80,0.07);
+}
+
+.img-compare-container .label.input {
+    left: 10px;
+    transform: none;
+}
+
+.img-compare-container .label.ours {
+    right: 10px;
+    transform: none;
+}
+
+.img-compare-container:hover .label {
+    opacity: 1;
+}
+
+        /* 滑动画廊样式 */
+        .slider-gallery {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .slider-row {
+            display: flex;
+            transition: transform 0.5s ease;
+            margin-bottom: 10px;
+        }
+
+        .slider-item {
+            flex: 0 0 33.333%; /* 改回33.333%，一行显示3张 */
+            padding: 0 5px; /* 完全移除内边距，消除图片间的留白 */
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+
+        .img-compare-container {
+            position: relative;
+            width: 100%; /* 使用百分比宽度 */
+            max-width: 100%; /* 移除最大宽度限制，让图片填满容器 */
+            height: 500px; /* 保持高度一致 */
+            overflow: hidden;
+            margin: 0; /* 移格外边距 */
+        }
+
+        /* 调整滑动画廊容器样式 */
+        .slider-gallery {
+            position: relative;
+            width: 93%;
+            max-width: 93%;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0 15px;
+        }
+
+        /* 调整行间距 */
+        .slider-row {
+            display: flex;
+            transition: transform 0.5s ease;
+            margin-bottom: 0; /* 移除行间距 */
+        }
+
+        @media (max-width: 992px) {
+    .slider-item {
+        flex: 0 0 33.333%; /* 保持中等屏幕也显示3张 */
+        padding: 0 8px; /* 稍微减小内边距 */
+    }
+
+    .img-compare-container {
+        max-width: 95%;
+        height: 250px; /* 稍微减小高度 */
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-item {
+        flex: 0 0 50%; /* 小屏幕显示2张 */
+        padding: 0 6px; /* 进一步减小内边距 */
+    }
+
+    .img-compare-container {
+        max-width: 95%;
+        height: 200px;
+    }
+}
+
+        @media (max-width: 576px) {
+            .slider-item {
+                flex: 0 0 100%; /* 超小屏幕显示1张 */
+            }
+
+            .img-compare-container {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 20px;
+            border: none;
+        }
+
+        .slider-prev {
+            left: 10px;
+        }
+
+        .slider-next {
+            right: 10px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .slider-dot.active {
+            background: #333;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 992px) {
+            .slider-item {
+                flex: 0 0 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slider-item {
+                flex: 0 0 100%;
+            }
+
+            .img-compare-container {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+    <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="title">RS3DBench: A Comprehensive Benchmark for 3D Spatial Perception in Remote Sensing</div>
+    <div class="subtitle"></div>
+    <div class="authors"></div>
+    <div class="button-group">
+        <button class="custom-btn paper">
+            <i class="fa-solid fa-file-pdf" style="color:#e25822"></i>
+            Paper
+        </button>
+        <button class="custom-btn code">
+            <i class="fa-brands fa-github"></i>
+            Code
+        </button>
+        <button class="custom-btn demo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" style="vertical-align:middle;"
+                 viewBox="0 0 95 88" fill="none">
+                <path fill="#FFD21E" d="M47.21 76.5a34.75 34.75 0 1 0 0-69.5 34.75 34.75 0 0 0 0 69.5Z"/>
+                <path
+                        fill="#FF9D0B"
+                        d="M81.96 41.75a34.75 34.75 0 1 0-69.5 0 34.75 34.75 0 0 0 69.5 0Zm-73.5 0a38.75 38.75 0 1 1 77.5 0 38.75 38.75 0 0 1-77.5 0Z"
+                />
+                <path
+                        fill="#3A3B45"
+                        d="M58.5 32.3c1.28.44 1.78 3.06 3.07 2.38a5 5 0 1 0-6.76-2.07c.61 1.15 2.55-.72 3.7-.32ZM34.95 32.3c-1.28.44-1.79 3.06-3.07 2.38a5 5 0 1 1 6.76-2.07c-.61 1.15-2.56-.72-3.7-.32Z"
+                />
+                <path
+                        fill="#FF323D"
+                        d="M46.96 56.29c9.83 0 13-8.76 13-13.26 0-2.34-1.57-1.6-4.09-.36-2.33 1.15-5.46 2.74-8.9 2.74-7.19 0-13-6.88-13-2.38s3.16 13.26 13 13.26Z"
+                />
+                <path
+                        fill="#3A3B45"
+                        fill-rule="evenodd"
+                        d="M39.43 54a8.7 8.7 0 0 1 5.3-4.49c.4-.12.81.57 1.24 1.28.4.68.82 1.37 1.24 1.37.45 0 .9-.68 1.33-1.35.45-.7.89-1.38 1.32-1.25a8.61 8.61 0 0 1 5 4.17c3.73-2.94 5.1-7.74 5.1-10.7 0-2.34-1.57-1.6-4.09-.36l-.14.07c-2.31 1.15-5.39 2.67-8.77 2.67s-6.45-1.52-8.77-2.67c-2.6-1.29-4.23-2.1-4.23.29 0 3.05 1.46 8.06 5.47 10.97Z"
+                        clip-rule="evenodd"
+                />
+                <path
+                        fill="#FF9D0B"
+                        d="M70.71 37a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM24.21 37a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM17.52 48c-1.62 0-3.06.66-4.07 1.87a5.97 5.97 0 0 0-1.33 3.76 7.1 7.1 0 0 0-1.94-.3c-1.55 0-2.95.59-3.94 1.66a5.8 5.8 0 0 0-.8 7 5.3 5.3 0 0 0-1.79 2.82c-.24.9-.48 2.8.8 4.74a5.22 5.22 0 0 0-.37 5.02c1.02 2.32 3.57 4.14 8.52 6.1 3.07 1.22 5.89 2 5.91 2.01a44.33 44.33 0 0 0 10.93 1.6c5.86 0 10.05-1.8 12.46-5.34 3.88-5.69 3.33-10.9-1.7-15.92-2.77-2.78-4.62-6.87-5-7.77-.78-2.66-2.84-5.62-6.25-5.62a5.7 5.7 0 0 0-4.6 2.46c-1-1.26-1.98-2.25-2.86-2.82A7.4 7.4 0 0 0 17.52 48Zm0 4c.51 0 1.14.22 1.82.65 2.14 1.36 6.25 8.43 7.76 11.18.5.92 1.37 1.31 2.14 1.31 1.55 0 2.75-1.53.15-3.48-3.92-2.93-2.55-7.72-.68-8.01.08-.02.17-.02.24-.02 1.7 0 2.45 2.93 2.45 2.93s2.2 5.52 5.98 9.3c3.77 3.77 3.97 6.8 1.22 10.83-1.88 2.75-5.47 3.58-9.16 3.58-3.81 0-7.73-.9-9.92-1.46-.11-.03-13.45-3.8-11.76-7 .28-.54.75-.76 1.34-.76 2.38 0 6.7 3.54 8.57 3.54.41 0 .7-.17.83-.6.79-2.85-12.06-4.05-10.98-8.17.2-.73.71-1.02 1.44-1.02 3.14 0 10.2 5.53 11.68 5.53.11 0 .2-.03.24-.1.74-1.2.33-2.04-4.9-5.2-5.21-3.16-8.88-5.06-6.8-7.33.24-.26.58-.38 1-.38 3.17 0 10.66 6.82 10.66 6.82s2.02 2.1 3.25 2.1c.28 0 .52-.1.68-.38.86-1.46-8.06-8.22-8.56-11.01-.34-1.9.24-2.85 1.31-2.85Z"
+                />
+                <path
+                        fill="#FFD21E"
+                        d="M38.6 76.69c2.75-4.04 2.55-7.07-1.22-10.84-3.78-3.77-5.98-9.3-5.98-9.3s-.82-3.2-2.69-2.9c-1.87.3-3.24 5.08.68 8.01 3.91 2.93-.78 4.92-2.29 2.17-1.5-2.75-5.62-9.82-7.76-11.18-2.13-1.35-3.63-.6-3.13 2.2.5 2.79 9.43 9.55 8.56 11-.87 1.47-3.93-1.71-3.93-1.71s-9.57-8.71-11.66-6.44c-2.08 2.27 1.59 4.17 6.8 7.33 5.23 3.16 5.64 4 4.9 5.2-.75 1.2-12.28-8.53-13.36-4.4-1.08 4.11 11.77 5.3 10.98 8.15-.8 2.85-9.06-5.38-10.74-2.18-1.7 3.21 11.65 6.98 11.76 7.01 4.3 1.12 15.25 3.49 19.08-2.12Z"
+                />
+                <path
+                        fill="#FF9D0B"
+                        d="M77.4 48c1.62 0 3.07.66 4.07 1.87a5.97 5.97 0 0 0-1.33 3.76 7.1 7.1 0 0 0-1.94-.3c-1.55 0-2.95.59-3.94 1.66a5.8 5.8 0 0 0-.8 7 5.3 5.3 0 0 0-1.79 2.82c-.24.9-.48 2.8-.8 4.74a5.22 5.22 0 0 0-.37 5.02c-1.02 2.32-3.57 4.14-8.51 6.1-3.08 1.22-5.9 2-5.92 2.01a44.33 44.33 0 0 1-10.93 1.6c-5.86 0-10.05-1.8-12.46-5.34-3.88-5.69-3.33-10.9 1.7-15.92 2.78-2.78 4.63-6.87 5.01-7.77.78-2.66-2.84-5.62-6.25-5.62a5.7 5.7 0 0 0-4.6 2.46c-1-1.26-1.98-2.25-2.86-2.82A7.4 7.4 0 0 0 17.52 48Zm0 4c-.51 0-1.13.22-1.82.65-2.13 1.36-6.25 8.43-7.76 11.18a2.43 2.43 0 0 1-2.14 1.31c-1.54 0-2.75-1.53-.14-3.48 3.91-2.93 2.54-7.72.67-8.01a1.54 1.54 0 0 0-.24-.02c-1.7 0-2.45 2.93-2.45 2.93s-2.2 5.52-5.97 9.3c-3.78 3.77-3.98 6.8-1.22 10.83 1.87 2.75 5.47 3.58 9.15 3.58 3.82 0 7.73-.9 9.93-1.46.1-.03 13.45-3.8 11.76-7-.29-.54-.75-.76-1.34-.76-2.38 0-6.71 3.54-8.57 3.54-.42 0-.71-.17-.83-.6-.8-2.85 12.05-4.05 10.97-8.17-.19-.73-.7-1.02-1.44-1.02-3.14 0-10.2 5.53-11.68 5.53-.1 0-.19-.03-.23-.1-.74-1.2-.34-2.04 4.88-5.2 5.23-3.16 8.9-5.06 6.8-7.33-.23-.26-.57-.38-.98-.38-3.18 0-10.67 6.82-10.67 6.82s-2.02 2.1-3.24 2.1a.74.74 0 0 1-.68-.38c-.87-1.46 8.05-8.22 8.55-11.01.34-1.9-.24-2.85-1.31-2.85Z"
+                />
+                <path
+                        fill="#FFD21E"
+                        d="M56.33 76.69c-2.75-4.04-2.56-7.07 1.22-10.84 3.77-3.77 5.97-9.3 5.97-9.3s.82-3.2 2.7-2.9c1.86.3 3.23 5.08-.68 8.01-3.92 2.93.78 4.92 2.28 2.17 1.51-2.75 5.63-9.82 7.76-11.18 2.13-1.35 3.64-.6 3.13 2.2-.5 2.79-9.42 9.55-8.55 11 .86 1.47 3.92-1.71 3.92-1.71s9.58-8.71 11.66-6.44c2.08 2.27-1.58 4.17-6.8 7.33-5.23 3.16-5.63 4-4.9 5.2.75 1.2 12.28-8.53-13.36-4.4 1.08 4.11-11.76 5.3-10.97 8.15.8 2.85 9.05-5.38 10.74-2.18 1.69 3.21-11.65 6.98-11.76 7.01-4.31 1.12-15.26 3.49-19.08-2.12Z"
+                />
+                <path
+                        fill="#FF9D0B"
+                        d="M77.4 48c1.62 0 3.07.66 4.07 1.87a5.97 5.97 0 0 1 1.33 3.76 7.1 7.1 0 0 1 1.95-.3c1.55 0 2.95.59 3.94 1.66a5.8 5.8 0 0 1 .8 7 5.3 5.3 0 0 1 1.78 2.82c.24.9.48 2.8-.8 4.74a5.22 5.22 0 0 1 .37 5.02c-1.02 2.32-3.57 4.14-8.51 6.1-3.08 1.22-5.9 2-5.92 2.01a44.33 44.33 0 0 1-10.93 1.6c-5.86 0-10.05-1.8-12.46-5.34-3.88-5.69-3.33-10.9 1.7-15.92 2.78-2.78 4.63-6.87 5.01-7.77.78-2.66-2.84-5.62-6.25-5.62a5.7 5.7 0 0 1 4.6 2.46c1-1.26 1.98-2.25 2.87-2.82A7.4 7.4 0 0 1 77.4 48Zm0 4c-.51 0-1.13.22-1.82.65-2.13 1.36-6.25 8.43-7.76 11.18a2.43 2.43 0 0 1-2.14 1.31c-1.54 0-2.75-1.53-.14-3.48 3.91-2.93 2.54-7.72.67-8.01a1.54 1.54 0 0 0-.24-.02c-1.7 0-2.45 2.93-2.45 2.93s-2.2 5.52-5.97 9.3c-3.78 3.77-3.98 6.8-1.22 10.83 1.87 2.75 5.47 3.58 9.15 3.58 3.82 0 7.73-.9 9.93-1.46.1-.03 13.45-3.8 11.76-7-.29-.54-.75-.76-1.34-.76-2.38 0-6.71 3.54-8.57 3.54-.42 0-.71-.17-.83-.6-.8-2.85 12.05-4.05 10.97-8.17-.19-.73-.7-1.02-1.44-1.02-3.14 0-10.2 5.53-11.68 5.53-.1 0-.19-.03-.23-.1-.74-1.2-.34-2.04 4.88-5.2 5.23-3.16 8.9-5.06 6.8-7.33-.23-.26-.57-.38-.98-.38-3.18 0-10.67 6.82-10.67 6.82s-2.02 2.1-3.24 2.1a.74.74 0 0 1-.68-.38c-.87-1.46 8.05-8.22 8.55-11.01.34-1.9-.24-2.85-1.31-2.85Z"
+                />
+                <path
+                        fill="#FFD21E"
+                        d="M56.33 76.69c-2.75-4.04-2.56-7.07 1.22-10.84 3.77-3.77 5.97-9.3 5.97-9.3s.82-3.2 2.7-2.9c1.86.3 3.23 5.08-.68 8.01-3.92 2.93.78 4.92 2.28 2.17 1.51-2.75 5.63-9.82 7.76-11.18 2.13-1.35 3.64-.6 3.13 2.2-.5 2.79-9.42 9.55-8.55 11 .86 1.47 3.92-1.71 3.92-1.71s9.58-8.71 11.66-6.44c2.08 2.27-1.58 4.17-6.8 7.33-5.23 3.16-5.63 4-4.9 5.2.75 1.2 12.28-8.53-13.36-4.4 1.08 4.11-11.76 5.3-10.97 8.15.8 2.85 9.05-5.38 10.74-2.18 1.69 3.21-11.65 6.98-11.76 7.01-4.31 1.12-15.26 3.49-19.08-2.12Z"
+                />
+                <path
+                        fill="#FF9D0B"
+                        d="M77.4 48c1.62 0 3.07.66 4.07 1.87a5.97 5.97 0 0 1 1.33 3.76 7.1 7.1 0 0 1 1.95-.3c1.55 0 2.95.59 3.94 1.66a5.8 5.8 0 0 1 .8 7 5.3 5.3 0 0 1 1.78 2.82c.24.9.48 2.8-.8 4.74a5.22 5.22 0 0 1 .37 5.02c-1.02 2.32-3.57 4.14-8.51 6.1-3.08 1.22-5.9 2-5.92 2.01a44.33 44.33 0 0 1-10.93 1.6c-5.86 0-10.05-1.8-12.46-5.34-3.88-5.69-3.33-10.9 1.7-15.92 2.78-2.78 4.63-6.87 5.01-7.77.78-2.66-2.84-5.62-6.25-5.62a5.7 5.7 0 0 1 4.6 2.46c1-1.26 1.98-2.25 2.87-2.82A7.4 7.4 0 0 1 77.4 48Zm0 4c-.51 0-1.13.22-1.82.65-2.13 1.36-6.25 8.43-7.76 11.18a2.43 2.43 0 0 1-2.14 1.31c-1.54 0-2.75-1.53-.14-3.48 3.91-2.93 2.54-7.72.67-8.01a1.54 1.54 0 0 0-.24-.02c-1.7 0-2.45 2.93-2.45 2.93s-2.2 5.52-5.97 9.3c-3.78 3.77-3.98 6.8-1.22 10.83 1.87 2.75 5.47 3.58 9.15 3.58 3.82 0 7.73-.9 9.93-1.46.1-.03 13.45-3.8 11.76-7-.29-.54-.75-.76-1.34-.76-2.38 0-6.71 3.54-8.57 3.54-.42 0-.71-.17-.83-.6-.8-2.85 12.05-4.05 10.97-8.17-.19-.73-.7-1.02-1.44-1.02-3.14 0-10.2 5.53-11.68 5.53-.1 0-.19-.03-.23-.1-.74-1.2-.34-2.04 4.88-5.2 5.23-3.16 8.9-5.06 6.8-7.33-.23-.26-.57-.38-.98-.38-3.18 0-10.67 6.82-10.67 6.82s-2.02 2.1-3.24 2.1a.74.74 0 0 1-.68-.38c-.87-1.46 8.05-8.22 8.55-11.01.34-1.9-.24-2.85-1.31-2.85Z"
+                />
+                <path
+                        fill="#FFD21E"
+                        d="M56.33 76.69c-2.75-4.04-2.56-7.07 1.22-10.84 3.77-3.77 5.97-9.3 5.97-9.3s.82-3.2 2.7-2.9c1.86.3 3.23 5.08-.68 8.01-3.92 2.93.78 4.92 2.28 2.17 1.51-2.75 5.63-9.82 7.76-11.18 2.13-1.35 3.64-.6 3.13 2.2-.5 2.79-9.42 9.55-8.55 11 .86 1.47 3.92-1.71 3.92-1.71s9.58-8.71 11.66-6.44c2.08 2.27-1.58 4.17-6.8 7.33-5.23 3.16-5.63 4-4.9 5.2.75 1.2 12.28-8.53-13.36-4.4 1.08 4.11-11.76 5.3-10.97 8.15.8 2.85 9.05-5.38 10.74-2.18 1.69 3.21-11.65 6.98-11.76 7.01-4.31 1.12-15.26 3.49-19.08-2.12Z"
+                />
+            </svg>
+            Interactive Demo
+        </button>
+        <button class="custom-btn tutorial">
+            <i class="fa-solid fa-vial"></i>
+            Diffusers Tutorial
+        </button>
+        <button class="custom-btn colab">
+            <i class="fa-brands fa-google"></i>
+            Google Colab
+        </button>
+    </div>
+    <div>
+        <img src="src/图片1.png" alt="主图" style="max-width: 80%; margin: 20px auto; border-radius: 12px;"/>
+        <div style="margin-top: 8px; color: #444; font-size: 1.05em;">
+            We propose the first comprehensive benchmark RS3DBench for spatial understanding of remote sensing images
+        </div>
+    </div>
+    <!-- 新增 Overview 和 Gallery 区域 -->
+    <div style="max-width: 700px; margin: 48px auto 0 auto; text-align: left;">
+        <h2 style="text-align: center; font-size: 2.3em; font-weight: bold; margin-bottom: 0.5em; color: #222;">
+            Overview</h2>
+        <p style="font-size: 1.25em; color: #333; line-height: 1.6; margin-bottom: 1.2em;">
+            We propose the first comprehensive benchmark <b>RS3DBench</b> for spatial understanding of remote sensing
+            images,
+            which includes 54,951 pairs of pixel-level aligned remote sensing image depth maps and multimodal
+            descriptions,
+            and develop a multimodal fusion depth estimation model based on stable diffusion,
+            which achieves a performance breakthrough of up to 11% in remote sensing depth estimation tasks,
+            aiming to promote the development of geographic AI and 3D vision large models
+        </p>
+        <h2 style="text-align: center; font-size: 2.3em; font-weight: bold; margin: 2.5em 0 0.5em 0; color: #222;">
+            Gallery</h2>
+    </div>
+
+    <!-- 滑动画廊 -->
+    <div class="slider-gallery">
+        <!-- 上排滑动区域 -->
+        <div class="slider-row" id="top-row">
+            <!-- 第一组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/1.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/1.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/2.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/2.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/3.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/3.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第四组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/4.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/4.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第五组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/5.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/5.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下排滑动区域 -->
+        <div class="slider-row" id="bottom-row">
+            <!-- 第一组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/6.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/6.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/7.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/7.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/8.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/8.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第四组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/9.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/9.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第五组对比 -->
+            <div class="slider-item">
+                <div class="img-compare-container">
+                    <div class="label input">RGB</div>
+                    <div class="label ours">Depth</div>
+                    <img src="src/img/depth/10.png" alt="RGB">
+                    <div class="img-overlay">
+                        <img src="src/img/RGB/10.png" alt="Depth">
+                    </div>
+                    <div class="twentytwenty-handle">
+                        <span class="twentytwenty-left-arrow"></span>
+                        <span class="twentytwenty-right-arrow"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 导航按钮 -->
+        <button class="slider-nav slider-prev">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="slider-nav slider-next">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- 指示点 -->
+        <div class="slider-dots" id="slider-dots"></div>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            // 确保图片加载完成后再初始化
+            window.addEventListener('load', function () {
+                document.querySelectorAll('.juxtapose').forEach(function (el) {
+                    try {
+                        // 检查图片是否存在
+                        if (el.children.length < 2) {
+                            console.error('Juxtapose 容器需要恰好两张图片');
+                            return;
+                        }
+
+                        new juxtapose.JXSlider(el,
+                            [
+                                {src: el.children[0].src, label: el.children[0].getAttribute('data-label') || ''},
+                                {src: el.children[1].src, label: el.children[1].getAttribute('data-label') || ''}
+                            ],
+                            {
+                                animate: true,
+                                showLabels: true,
+                                showCredits: false,
+                                startingPosition: "50%",
+                                makeResponsive: true
+                            }
+                        );
+                    } catch (e) {
+                        console.error('初始化 JuxtaposeJS 时出错:', e);
+                    }
+                });
+            });
+        });
+        (function () {
+            const container = document.getElementById('compare');
+            const overlay = document.getElementById('overlay');
+            const handle = document.getElementById('handle');
+            let dragging = false;
+
+            const startDrag = e => {
+                e.preventDefault();
+                dragging = true;
+            };
+
+            const stopDrag = () => {
+                dragging = false;
+            };
+
+            const onDrag = e => {
+                if (!dragging) return;
+                const rect = container.getBoundingClientRect();
+                // 支持鼠标和触摸
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                let offsetX = clientX - rect.left;
+                offsetX = Math.max(0, Math.min(offsetX, rect.width));
+                // 设置覆盖宽度
+                overlay.style.width = offsetX + 'px';
+                // 调整滑块位置
+                handle.style.left = (offsetX - handle.offsetWidth / 2) + 'px';
+            };
+
+            handle.addEventListener('mousedown', startDrag);
+            handle.addEventListener('touchstart', startDrag);
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('touchmove', onDrag);
+        })();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保图片加载完成后再初始化
+            window.addEventListener('load', function() {
+                // 初始化所有图片对比组件
+                document.querySelectorAll('.img-compare-container').forEach(function(container) {
+                    const overlay = container.querySelector('.img-overlay');
+                    const handle = container.querySelector('.twentytwenty-handle');
+
+                    if (!overlay || !handle) return;
+
+                    // 初始化位置
+                    const containerWidth = container.offsetWidth;
+                    overlay.style.width = containerWidth / 2 + 'px';
+                    handle.style.left = (containerWidth / 2 - handle.offsetWidth / 2) + 'px';
+
+                    // 添加拖动功能
+                    let dragging = false;
+
+                    const startDrag = e => {
+                        e.preventDefault();
+                        dragging = true;
+                    };
+
+                    const stopDrag = () => {
+                        dragging = false;
+                    };
+
+                    const onDrag = e => {
+                        if (!dragging) return;
+                        const rect = container.getBoundingClientRect();
+                        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                        let offsetX = clientX - rect.left;
+
+                        offsetX = Math.max(0, Math.min(offsetX, rect.width));
+                        overlay.style.width = offsetX + 'px';
+                        handle.style.left = (offsetX - handle.offsetWidth / 2) + 'px';
+                    };
+
+                    handle.addEventListener('mousedown', startDrag);
+                    handle.addEventListener('touchstart', startDrag);
+                    document.addEventListener('mouseup', stopDrag);
+                    document.addEventListener('touchend', stopDrag);
+                    document.addEventListener('mousemove', onDrag);
+                    document.addEventListener('touchmove', onDrag);
+                });
+
+                // 滑动画廊功能
+                const topRow = document.getElementById('top-row');
+                const bottomRow = document.getElementById('bottom-row');
+                const prevBtn = document.querySelector('.slider-prev');
+                const nextBtn = document.querySelector('.slider-next');
+                const dotsContainer = document.getElementById('slider-dots');
+
+                if (!topRow || !bottomRow) return;
+
+                // 计算可见的幻灯片数量
+                const visibleSlides = 3;
+                const totalSlides = Math.ceil(topRow.children.length / visibleSlides);
+                let currentSlide = 0;
+                let autoSlideInterval;
+
+                // 创建指示点
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('slider-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    dotsContainer.appendChild(dot);
+                }
+
+                // 更新指示点
+                function updateDots() {
+                    const dots = dotsContainer.querySelectorAll('.slider-dot');
+                    dots.forEach((dot, i) => {
+                        if (i === currentSlide) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+
+                // 滑动到指定位置
+                function goToSlide(index) {
+                    currentSlide = index;
+                    const slideWidth = topRow.querySelector('.slider-item').offsetWidth;
+                    topRow.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                    bottomRow.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                    updateDots();
+
+                    // 重置自动滑动计时器
+                    resetAutoSlide();
+                }
+
+                // 下一张
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    goToSlide(currentSlide);
+                }
+
+                // 上一张
+                function prevSlide() {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    goToSlide(currentSlide);
+                }
+
+                // 自动滑动
+                function startAutoSlide() {
+                    autoSlideInterval = setInterval(nextSlide, 5000); // 每5秒切换一次
+                }
+
+                // 重置自动滑动
+                function resetAutoSlide() {
+                    clearInterval(autoSlideInterval);
+                    startAutoSlide();
+                }
+
+                // 添加事件监听
+                prevBtn.addEventListener('click', prevSlide);
+                nextBtn.addEventListener('click', nextSlide);
+
+                // 开始自动滑动
+                startAutoSlide();
+
+                // 鼠标悬停时暂停自动滑动
+                const sliderGallery = document.querySelector('.slider-gallery');
+                sliderGallery.addEventListener('mouseenter', () => {
+                    clearInterval(autoSlideInterval);
+                });
+
+                sliderGallery.addEventListener('mouseleave', () => {
+                    startAutoSlide();
+                });
+
+                // 响应窗口大小变化
+                window.addEventListener('resize', () => {
+                    goToSlide(currentSlide);
+                });
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
