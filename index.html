@@ -872,40 +872,35 @@
     <div class="level4">
         <h2 style="text-align: center; font-size: 2.3em; font-weight: bold; margin: 2.5em 0 0.5em 0; color: #222;">
             Dataset Pipeline</h2>
-        <h3 style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;font-family: 'Noto Sans', sans-serif;box-sizing: inherit;margin: 0;padding: 0;word-break: break-word;text-align: center!important;color: #363636;font-weight: 600;line-height: 1.125;font-size: 1.5em;margin-bottom: 1.5rem;">
-            Data crawling
-        </h3>
-        <p style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;color: #4a4a4a;font-size: 1em;font-weight: 400;line-height: 1.5;font-family: 'Noto Sans', sans-serif;text-align: justify!important;box-sizing: inherit;margin: 0;padding: 0;margin-bottom: 1em;
-          max-width: 1000px;
-    word-wrap: break-word;margin: 0 auto; padding-bottom: 20px">
-            The RS3DBench dataset amalgamates multi-source DEM data: ALOS AW3D30 (30m resolution for Japan, Korea,
-            Southeast Asia, and the Mediterranean)~~\cite{17}, SwissALTI3D LiDAR fusion data (with a resolution ranging
-            from 0.5 to 2m)~~\cite{16}, and Sentinel-2-derived Australian DEM (5m)~~\cite{33}. Standardized according to
-            the UTM/WGS84 coordinate systems, this geospatial repository encompasses coastal lowlands, highlands,
-            mountainous regions, and plains, thus enabling large-scale terrain analysis and precise surface modeling.
-        </p>
+        <!--        <h3 style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;font-family: 'Noto Sans', sans-serif;box-sizing: inherit;margin: 0;padding: 0;word-break: break-word;text-align: center!important;color: #363636;font-weight: 600;line-height: 1.125;font-size: 1.5em;margin-bottom: 1.5rem;">-->
+        <!--            Data crawling-->
+        <!--        </h3>-->
+        <!--        <p style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;color: #4a4a4a;font-size: 1em;font-weight: 400;line-height: 1.5;font-family: 'Noto Sans', sans-serif;text-align: justify!important;box-sizing: inherit;margin: 0;padding: 0;margin-bottom: 1em;-->
+        <!--          max-width: 1000px;-->
+        <!--    word-wrap: break-word;margin: 0 auto; padding-bottom: 20px">-->
+        <!--            The RS3DBench dataset amalgamates multi-source DEM data: ALOS AW3D30 (30m resolution for Japan, Korea,-->
+        <!--            Southeast Asia, and the Mediterranean)~~\cite{17}, SwissALTI3D LiDAR fusion data (with a resolution ranging-->
+        <!--            from 0.5 to 2m)~~\cite{16}, and Sentinel-2-derived Australian DEM (5m)~~\cite{33}. Standardized according to-->
+        <!--            the UTM/WGS84 coordinate systems, this geospatial repository encompasses coastal lowlands, highlands,-->
+        <!--            mountainous regions, and plains, thus enabling large-scale terrain analysis and precise surface modeling.-->
+        <!--        </p>-->
         <div class="image-row">
             <img src="src/pipeline1.png" alt="Image 1" class="level4-image">
         </div>
-        <h3 style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;
-        font-family: 'Noto Sans', sans-serif;box-sizing: inherit;margin: 0;padding-top:30px;word-break: break-word;
-        text-align: center!important;color: #363636;font-weight: 600;line-height: 1.125;font-size: 1.5em;margin-bottom: 1.5rem;">
-            Alignment
-        </h3>
-        <p style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;color: #4a4a4a;font-size: 1em;font-weight: 400;line-height: 1.5;font-family: 'Noto Sans', sans-serif;text-align: justify!important;box-sizing: inherit;margin: 0;padding: 0;margin-bottom: 1em;
+        <!--        <h3 style="    -webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;text-size-adjust: 100%;-->
+        <!--        font-family: 'Noto Sans', sans-serif;box-sizing: inherit;margin: 0;padding-top:30px;word-break: break-word;-->
+        <!--        text-align: center!important;color: #363636;font-weight: 600;line-height: 1.125;font-size: 1.5em;margin-bottom: 1.5rem;">-->
+        <!--            Alignment-->
+        <!--        </h3>-->
+        <p style="    color: #4a4a4a;font-size: 1.1em;font-weight: 400;line-height: 1.5;font-family: 'Noto Sans', sans-serif;box-sizing: inherit;margin: 0;padding: 0;margin-bottom: 1em;
           max-width: 1000px;
-    word-wrap: break-word;margin: 0 auto; padding-bottom: 20px">
-            We have solved the key issue of the lack of RGB data in the public digital elevation model (DEM) dataset
-            (ALOS/swissALTI3D)~\cite{17,16}. We obtained the geographic coordinate locations and coordinate system IDs
-            of the DEM data, and converted them to location coordinates in the 'EPSG:4326' or 'EPSG:2056' coordinate
-            systems, in order to retrieve the corresponding RGB data provided by Sentinel 1, Sentinel 2, swissALTI3D,
-            and Google Earth. The RGB images will undergo cloud and haze removal, atmospheric correction, radiometric
-            correction, and normalization to create rigorously aligned DEM and RGB data. Considering that these data do
-            not strictly align with RGB images in terms of temporal and spatial dimensions, and that some images are
-            turbid and blurry, about 20\% to 30\% of the misaligned images were manually screened and filtered. Through
-            experiments, we identified outliers generated due to the limitations of satellite sensors that created
-            misleading models, and processed them through interpolation to ensure the accuracy of the data. For more
-            details, please refer to Appendix~\ref{app:text}.
+    word-wrap: break-word;margin: 0 auto; padding-bottom: 20px; padding-top: 30px; ">
+            The pipeline of data collection of RS3DBench:
+
+            <strong style="font-weight: 1000">(1) Data Crawling</strong>
+            <strong style="font-weight: 1000">(2) Alignment</strong>
+            <strong style="font-weight: 1000">(3) Annotations</strong>
+            <strong style="font-weight: 1000">(4) Post-Processing</strong>
         </p>
     </div>
 
@@ -923,7 +918,7 @@
     <!-- Benchmark Comparison Section -->
     <div class="level3">
         <h2 style="text-align: center; font-size: 2.3em; font-weight: bold; margin: 2.5em 0 0.5em 0; color: #222;">
-            BenchMark Compare</h2>
+            BenchMark</h2>
         <img src="src/output1.png" alt="Benchmark Image" class="level3-image">
     </div>
     <script>
