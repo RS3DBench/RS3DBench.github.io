@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/RS3DBenchpage.iml" filepath="$PROJECT_DIR$/.idea/RS3DBenchpage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RS3DBench.github.io.iml" filepath="$PROJECT_DIR$/.idea/RS3DBench.github.io.iml" />
     </modules>
   </component>
 </project>
