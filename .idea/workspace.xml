@@ -5,11 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20585936-870c-443c-a13f-a0c4ce35e334" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/huggingface_logo-noborder.svg" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/.idea/img.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/RGB/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/depth/9.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,27 +39,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2x9tgPijwwYY3mcf2AAa3lD5QtK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/RS3DBench.github.io/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -56,11 +88,37 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1747362228215</updated>
-      <workItem from="1747362229536" duration="446000" />
+      <workItem from="1747362229536" duration="10970000" />
+      <workItem from="1747641298524" duration="13149000" />
+      <workItem from="1747662216108" duration="774000" />
+      <workItem from="1747706968967" duration="14817000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/index.html</url>
+          <line>936</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

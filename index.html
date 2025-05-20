@@ -21,7 +21,7 @@
 
         .title {
             font-size: 3em;
-            font-weight: bold;
+            font-weight: 650;
             margin-top: 48px;
             margin-bottom: 0.5em;
             line-height: 1.4;
@@ -29,6 +29,10 @@
             text-align: center;
             word-wrap: break-word;
             max-width: 100%;
+            /*    换个好看点的字体*/
+            /*    font-family: 'Noto Sans', sans-serif;*/
+            /*    font-family: 'Segoe UI', Arial, sans-serif;*/
+            font-family: 'Microsoft YaHei', sans-serif;
         }
 
         .subtitle {
@@ -156,13 +160,13 @@
             opacity: 0.85;
         }
 
-        .img-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            justify-content: center;
-            margin: 32px 0 18px 0;
-        }
+        /*.img-grid {*/
+        /*    display: grid;*/
+        /*    grid-template-columns: repeat(5, 1fr);*/
+        /*    gap: 8px;*/
+        /*    justify-content: center;*/
+        /*    margin: 32px 0 18px 0;*/
+        /*}*/
 
         .img-grid img {
             width: 100%;
@@ -172,29 +176,29 @@
             background: #eee;
         }
 
-        .arrow-row {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 60px;
-            margin: 0 0 0 0;
-            min-height: 40px;
-        }
+        /*.arrow-row {*/
+        /*    display: flex;*/
+        /*    justify-content: center;*/
+        /*    align-items: flex-end;*/
+        /*    gap: 60px;*/
+        /*    margin: 0 0 0 0;*/
+        /*    min-height: 40px;*/
+        /*}*/
 
-        .arrow {
-            font-size: 2.5em;
-            color: #d33;
-            margin: 0 10px;
-            user-select: none;
-        }
+        /*.arrow {*/
+        /*    font-size: 2.5em;*/
+        /*    color: #d33;*/
+        /*    margin: 0 10px;*/
+        /*    user-select: none;*/
+        /*}*/
 
-        .bottom-section {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 40px;
-            margin-top: 18px;
-        }
+        /*.bottom-section {*/
+        /*    display: flex;*/
+        /*    justify-content: center;*/
+        /*    align-items: flex-end;*/
+        /*    gap: 40px;*/
+        /*    margin-top: 18px;*/
+        /*}*/
 
         .level2 img {
             /*限制高度*/
@@ -222,10 +226,9 @@
                 max-width: 98vw;
             }
 
-            .img-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
+            /*.img-grid {*/
+            /*    grid-template-columns: repeat(3, 1fr);*/
+            /*}*/
             .bottom-section img {
                 width: 120px;
             }
@@ -240,24 +243,16 @@
                 font-size: 2em;
             }
 
-            .img-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
+            /*.img-grid {*/
+            /*    grid-template-columns: repeat(2, 1fr);*/
+            /*}*/
             .bottom-section img {
                 width: 80px;
             }
 
-            .arrow-row {
-                gap: 20px;
-            }
-        }
-
-        .img-compare-container {
-            position: relative;
-            width: 100px; /* 同样写成图片实际宽度 */
-            height: 100px; /* 图片实际高度 */
-            overflow: hidden;
+            /*.arrow-row {*/
+            /*    gap: 20px;*/
+            /*}*/
         }
 
         .img-compare-container img {
@@ -321,17 +316,34 @@
             box-shadow: 0 4px 18px 0 rgba(60, 60, 60, 0.22);
         }
 
+
+        .img-compare-container .img-overlay img {
+            display: block;
+            width: auto; /* 宽度不要固定填满 */
+            height: 100%; /* 高度一定要撑满 overlay 容器 */
+            object-fit: contain;
+            position: relative; /* 改为相对定位，让它们参与文档流 */
+        }
+
+        .img-compare-container .img-bellow img {
+            display: block;
+            width: 100%; /* 底图填满整个对比容器宽度 */
+            height: auto; /* 按比例决定高度并撑开父容器 */
+            object-fit: contain;
+            position: relative; /* 改为相对定位，让它们参与文档流 */
+        }
+
         /* 上下延伸的细线 */
         .twentytwenty-handle:before,
         .twentytwenty-handle:after {
             content: "";
             position: absolute;
             left: 50%;
-            width: 2px;
-            height: 9999px;
+            width: 3px;
+            height: 39999%;
             background: #fff;
             transform: translateX(-50%);
-            z-index: -1;
+            z-index: 999;
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
         }
 
@@ -426,24 +438,51 @@
         }
 
         .slider-row {
-            display: flex;
+            /*display: flex;*/
+            /*gap: 10px; !* 卡片间距 *!*/
+            /*transition: transform 0.5s ease;*/
+            /*margin: 0;*/
+            display: grid;
+            gap: 10px; /* 卡片间距 */
+            grid-template-columns: repeat(4, 1fr);
             transition: transform 0.5s ease;
-            margin-bottom: 10px;
+            margin: 0;
         }
 
         .slider-item {
-            flex: 0 0 25.25%; /* 改回33.333%，一行显示3张 */
+            flex: 0 0 calc((100% - 3 * 10px) / 4);
             padding: 0 5px; /* 完全移除内边距，消除图片间的留白 */
             box-sizing: border-box;
             display: flex;
             justify-content: center;
         }
 
+        /* 大屏：3 列 */
+        @media (max-width: 1200px) {
+            .slider-item {
+                flex: 0 0 calc((100% - 2 * 10px) / 3);
+            }
+        }
+
+        /* 中屏：2 列 */
+        @media (max-width: 900px) {
+            .slider-item {
+                flex: 0 0 calc((100% - 1 * 10px) / 2);
+            }
+        }
+
+        /* 小屏：1 列 */
+        @media (max-width: 600px) {
+            .slider-item {
+                flex: 0 0 100%;
+            }
+        }
+
         .img-compare-container {
             position: relative;
             width: 100%; /* 使用百分比宽度 */
             max-width: 100%; /* 移除最大宽度限制，让图片填满容器 */
-            height: 337px; /* 保持高度一致 */
+            height: auto; /* 高度自适应 */
             overflow: hidden;
             margin: 0; /* 移格外边距 */
         }
@@ -455,7 +494,7 @@
             max-width: 85%;
             margin: 0 auto;
             overflow: hidden;
-            padding: 0 15px;
+            padding: 0;
         }
 
         /* 调整行间距 */
@@ -465,40 +504,10 @@
             margin-bottom: 0; /* 移除行间距 */
         }
 
-        @media (max-width: 992px) {
-            .slider-item {
-                flex: 0 0 33.333%; /* 保持中等屏幕也显示3张 */
-                padding: 0 8px; /* 稍微减小内边距 */
-            }
-
-            .img-compare-container {
-                max-width: 95%;
-                height: 250px; /* 稍微减小高度 */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .slider-item {
-                flex: 0 0 50%; /* 小屏幕显示2张 */
-                padding: 0 6px; /* 进一步减小内边距 */
-            }
-
-            .img-compare-container {
-                max-width: 95%;
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .slider-item {
-                flex: 0 0 100%; /* 超小屏幕显示1张 */
-            }
-
-            .img-compare-container {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1/1;
-            }
+        .slider-item .slider-item-bellow {
+            width: 100%; /* Images will now fill their parent container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Ensure images are contained within their parent container */
         }
 
         .slider-nav {
@@ -530,57 +539,63 @@
         .slider-dots {
             display: flex;
             justify-content: center;
-            margin-top: 15px;
+            align-items: center;
+            padding: 20px 0;
+            gap: 6px;
         }
 
         .slider-dot {
+            /* 点点之间的小间距 */
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            text-size-adjust: 100%;
+            font-size: 1em;
+            font-weight: 400;
+            line-height: 1.5;
+            font-family: 'Noto Sans', sans-serif;
+            color: rgba(0, 0, 0, .7);
+            visibility: visible;
+            text-align: center;
+            box-sizing: inherit;
+            background: #fff;
             width: 10px;
             height: 10px;
-            border-radius: 50%;
-            background: #ccc;
-            margin: 0 5px;
+            border-radius: 50%; /* 圆形 */
+            margin: 0 3px;
+            transition: transform .3s, -webkit-transform .3s;
             cursor: pointer;
+            background-color: #FFF;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 1);
+            display: inline-block;
         }
 
+        /* 高亮的圆点 */
         .slider-dot.active {
-            background: #333;
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 992px) {
-            .slider-item {
-                flex: 0 0 50%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .slider-item {
-                flex: 0 0 100%;
-            }
-
-            .img-compare-container {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1/1;
-            }
-        }
-
-        #bottom-row .img-compare-container,
-        #bottom-row .img-compare-container .img-overlay {
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
+            transform: scale(1.2);
+            background-color: #333;
         }
 
         /* 底部画廊：左上、右上角圆角 */
-        #top-row .img-compare-container,
-        #top-row .img-compare-container .img-overlay {
+        #top-row1 .img-compare-container {
             border-top-left-radius: 16px;
             border-top-right-radius: 16px;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
         }
+
+        #bottom-row1 .img-compare-container {
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+
+        #top-row2 .img-compare-container {
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        #bottom-row2 .img-compare-container {
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
     <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
@@ -591,27 +606,19 @@
     <div class="subtitle"></div>
     <div class="authors"></div>
     <div class="button-group">
-        <button class="custom-btn paper">
+        <button class="custom-btn" id="custom-btn-paper">
             <i class="fa-solid fa-file-pdf" style="color:#e25822"></i>
             Paper
         </button>
-        <button class="custom-btn code">
+        <button class="custom-btn" id="custom-btn-code">
             <i class="fa-brands fa-github"></i>
             Dataset Code
         </button>
-        <button class="custom-btn demo">
+        <button class="custom-btn" id="custom-btn-dataset">
             <img src="src/huggingface_logo-noborder.svg" width="25" height="25" style="vertical-align:middle;">
             </img>
             Our datasets
         </button>
-        <!-- <button class="custom-btn tutorial">
-            <i class="fa-solid fa-vial"></i>
-            Diffusers Tutorial
-        </button>
-        <button class="custom-btn colab">
-            <i class="fa-brands fa-google"></i>
-            Google Colab
-        </button> -->
     </div>
     <div class="level1">
         <img src="src/图片1.png" alt="主图" style="max-width: 60%; margin: 20px auto; border-radius: 12px;"/>
@@ -625,7 +632,8 @@
             Overview</h2>
         <p style="font-size: 1.25em; color: #333; line-height: 1.6; margin-bottom: 1.2em;">
             We introduce a novel benchmark designed to propel the advancement of general-purpose,
-            large-scale 3D vision models for remote sensing imagery.  This dataset encompasses 54,951 pairs of remote sensing images and
+            large-scale 3D vision models for remote sensing imagery. This dataset encompasses <strong>54,951</strong>
+            pairs of remote sensing images and
             pixel-level aligned depth maps, accompanied by corresponding textual descriptions, spanning a broad array of
             geographical contexts. It serves as a tool for training and assessing 3D visual perception models within
             remote sensing image spatial understanding tasks. Furthermore, we introduce a remotely sensed depth
@@ -640,171 +648,11 @@
 
     <!-- 滑动画廊 -->
     <div class="slider-gallery">
-        <!-- 上排滑动区域 -->
-        <div class="slider-row" id="top-row">
-            <!-- 第一组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/1.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/1.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
+        <!-- 上排 -->
+        <div class="slider-row" id="top-row1"></div>
 
-            <!-- 第二组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/2.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/2.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第三组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/3.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/3.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第四组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/4.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/4.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第五组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/5.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/5.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 下排滑动区域 -->
-        <div class="slider-row" id="bottom-row">
-            <!-- 第一组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/6.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/6.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第二组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/7.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/7.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第三组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/8.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/8.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第四组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/9.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/9.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第五组对比 -->
-            <div class="slider-item">
-                <div class="img-compare-container">
-                    <div class="label input">RGB</div>
-                    <div class="label ours">Depth</div>
-                    <img src="src/img/depth/10.png" alt="RGB">
-                    <div class="img-overlay">
-                        <img src="src/img/RGB/10.png" alt="Depth">
-                    </div>
-                    <div class="twentytwenty-handle">
-                        <span class="twentytwenty-left-arrow"></span>
-                        <span class="twentytwenty-right-arrow"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- 下排 -->
+        <div class="slider-row" id="bottom-row1"></div>
 
         <!-- 导航按钮 -->
         <button class="slider-nav slider-prev">
@@ -815,7 +663,26 @@
         </button>
 
         <!-- 指示点 -->
-        <div class="slider-dots" id="slider-dots"></div>
+        <div class="slider-dots"></div>
+    </div>
+
+    <div class="slider-gallery">
+        <!-- 上排 -->
+        <div class="slider-row" id="top-row2"></div>
+
+        <!-- 下排 -->
+        <div class="slider-row" id="bottom-row2"></div>
+
+        <!-- 导航按钮 -->
+        <button class="slider-nav slider-prev">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="slider-nav slider-next">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- 指示点 -->
+        <div class="slider-dots"></div>
     </div>
 
 
@@ -842,9 +709,9 @@
         <!--        text-align: center!important;color: #363636;font-weight: 600;line-height: 1.125;font-size: 1.5em;margin-bottom: 1.5rem;">-->
         <!--            Alignment-->
         <!--        </h3>-->
-        <p style="    color: #4a4a4a;font-size: 1.1em;font-weight: 400;line-height: 1.5;font-family: 'Noto Sans', sans-serif;box-sizing: inherit;margin: 0;padding: 0;margin-bottom: 1em;
-          max-width: 1000px;
-    word-wrap: break-word;margin: 0 auto; padding-bottom: 20px; padding-top: 30px; ">
+        <p style="    color: #4a4a4a;font-size: 1.1em;font-weight: 400;line-height: 1.5;
+        font-family: 'Noto Sans', sans-serif;box-sizing: inherit; max-width: 1000px;
+         word-wrap: break-word;margin: 0 auto; padding-bottom: 20px; padding-top: 30px; ">
             The pipeline of data collection of RS3DBench:
 
             <strong style="font-weight: 1000">(1) Data Crawling</strong>
@@ -863,6 +730,28 @@
             <img src="src/pie_chart.png" alt="Image 2" class="level2-image">
             <img src="src/resolution_hist.png" alt="Image 3" class="level2-image">
         </div>
+        <div>
+            <!--            <p style="font-size: 1.25em; color: #333; line-height: 1.6; margin-bottom: 1.2em; max-width: 1000px;">-->
+            <!--            要让p居中，不是text-align，是整体居中-->
+            <p style="font-size: 1.25em; color: #333; line-height: 1.6; margin-bottom: 1.2em; max-width: 1042px;
+                margin: 0 auto; padding-bottom: 20px; padding-top: 30px; text-align: left">
+                <strong style="font-weight: 1000">Figure 1</strong> shows the distribution percentage of different
+                terrains in the dataset at various altitudes,
+                excluding the ocean(The main altitude of the ocean is 0), and the altitude range is distributed between
+                -149 to 4813 meters, which is of great significance for large-scale remote sensing terrain modeling,
+                effectively compensating for the shortcomings of existing depth estimation datasets in terms of large
+                elevation changes and multiple terrain scenarios. <strong style="font-weight: 1000">Figure 2</strong>
+                presents the overall proportion of the six
+                major terrain categories: ocean 3.3%, low undulating mountains 9.1%, hills 6.4%, plains 38.0%, Highland
+                13.5%, and high undulating mountains 29.8%, providing crucial support for model training in complex
+                geographical scenarios. <strong style="font-weight: 1000">Figure 3</strong> depicts the distribution of
+                terrain counts at four resolutions (30 m, 5
+                m, 2 m, 0.5 m) with the cube root of the number of pixels as the vertical axis. The results indicate
+                that low resolution (30 m, 5 m) datasets have a higher proportion of plains and Highland, while
+                high-resolution (2 m, 0.5 m) primarily consists of mountainous types.
+
+            </p>
+        </div>
     </div>
 
     <!-- Benchmark Comparison Section -->
@@ -872,213 +761,302 @@
         <img src="src/output1.png" alt="Benchmark Image" class="level3-image">
     </div>
     <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            // 确保图片加载完成后再初始化
-            window.addEventListener('load', function () {
-                document.querySelectorAll('.juxtapose').forEach(function (el) {
-                    try {
-                        // 检查图片是否存在
-                        if (el.children.length < 2) {
-                            console.error('Juxtapose 容器需要恰好两张图片');
-                            return;
-                        }
+        document.addEventListener('DOMContentLoaded', () => {
+            function initPagerFor(gallery) {
+                const rows = gallery.querySelectorAll('.slider-row');
+                const prevBtn = gallery.querySelector('.slider-prev');
+                const nextBtn = gallery.querySelector('.slider-next');
+                const dotsBox = gallery.querySelector('.slider-dots');
+                let currentIndex = 0,
+                    visibleCols,
+                    maxIndex,
+                    autoSlideTimer,
+                    isDragging = false;
 
-                        new juxtapose.JXSlider(el,
-                            [
-                                {src: el.children[0].src, label: el.children[0].getAttribute('data-label') || ''},
-                                {src: el.children[1].src, label: el.children[1].getAttribute('data-label') || ''}
-                            ],
-                            {
-                                animate: true,
-                                showLabels: true,
-                                showCredits: false,
-                                startingPosition: "50%",
-                                makeResponsive: true
-                            }
-                        );
-                    } catch (e) {
-                        console.error('初始化 JuxtaposeJS 时出错:', e);
-                    }
-                });
-            });
-        });
-        (function () {
-            const container = document.getElementById('compare');
-            const overlay = document.getElementById('overlay');
-            const handle = document.getElementById('handle');
-            let dragging = false;
-
-            const startDrag = e => {
-                e.preventDefault();
-                dragging = true;
-            };
-
-            const stopDrag = () => {
-                dragging = false;
-            };
-
-            const onDrag = e => {
-                if (!dragging) return;
-                const rect = container.getBoundingClientRect();
-                // 支持鼠标和触摸
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                let offsetX = clientX - rect.left;
-                offsetX = Math.max(0, Math.min(offsetX, rect.width));
-                // 设置覆盖宽度
-                overlay.style.width = offsetX + 'px';
-                // 调整滑块位置
-                handle.style.left = (offsetX - handle.offsetWidth / 2) + 'px';
-            };
-
-            handle.addEventListener('mousedown', startDrag);
-            handle.addEventListener('touchstart', startDrag);
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('touchmove', onDrag);
-        })();
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 确保图片加载完成后再初始化
-            window.addEventListener('load', function () {
-                // 初始化所有图片对比组件
-                document.querySelectorAll('.img-compare-container').forEach(function (container) {
-                    const overlay = container.querySelector('.img-overlay');
-                    const handle = container.querySelector('.twentytwenty-handle');
-
-                    if (!overlay || !handle) return;
-
-                    // 初始化位置
-                    const containerWidth = container.offsetWidth;
-                    overlay.style.width = containerWidth / 2 + 'px';
-                    handle.style.left = (containerWidth / 2 - handle.offsetWidth / 2) + 'px';
-
-                    // 添加拖动功能
-                    let dragging = false;
-
-                    const startDrag = e => {
-                        e.preventDefault();
-                        dragging = true;
-                    };
-
-                    const stopDrag = () => {
-                        dragging = false;
-                    };
-
-                    const onDrag = e => {
-                        if (!dragging) return;
-                        const rect = container.getBoundingClientRect();
-                        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                        let offsetX = clientX - rect.left;
-
-                        offsetX = Math.max(0, Math.min(offsetX, rect.width));
-                        overlay.style.width = offsetX + 'px';
-                        handle.style.left = (offsetX - handle.offsetWidth / 2) + 'px';
-                    };
-
-                    handle.addEventListener('mousedown', startDrag);
-                    handle.addEventListener('touchstart', startDrag);
-                    document.addEventListener('mouseup', stopDrag);
-                    document.addEventListener('touchend', stopDrag);
-                    document.addEventListener('mousemove', onDrag);
-                    document.addEventListener('touchmove', onDrag);
-                });
-
-                // 滑动画廊功能
-                const topRow = document.getElementById('top-row');
-                const bottomRow = document.getElementById('bottom-row');
-                const prevBtn = document.querySelector('.slider-prev');
-                const nextBtn = document.querySelector('.slider-next');
-                const dotsContainer = document.getElementById('slider-dots');
-
-                if (!topRow || !bottomRow) return;
-
-                // 计算可见的幻灯片数量
-                const visibleSlides = 3;
-                const totalSlides = Math.ceil(topRow.children.length / visibleSlides);
-                let currentSlide = 0;
-                let autoSlideInterval;
-
-                // 创建指示点
-                for (let i = 0; i < totalSlides; i++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('slider-dot');
-                    if (i === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => goToSlide(i));
-                    dotsContainer.appendChild(dot);
+                // 计算一行能显示多少列
+                function calcVisibleCols() {
+                    const galleryW = gallery.clientWidth;
+                    const style = getComputedStyle(rows[0]);
+                    const gap = parseFloat(style.gap) || 0;
+                    const itemW = rows[0].querySelector('.slider-item')
+                        .getBoundingClientRect().width;
+                    return Math.max(1, Math.floor((galleryW + gap) / (itemW + gap)));
                 }
 
-                // 更新指示点
-                function updateDots() {
-                    const dots = dotsContainer.querySelectorAll('.slider-dot');
-                    dots.forEach((dot, i) => {
-                        if (i === currentSlide) {
-                            dot.classList.add('active');
-                        } else {
-                            dot.classList.remove('active');
-                        }
+                function buildDots() {
+                    dotsBox.innerHTML = '';
+                    for (let i = 0; i <= maxIndex; i++) {
+                        const dot = document.createElement('span');
+                        dot.className = 'slider-dot';
+                        if (i === currentIndex) dot.classList.add('active');
+                        dot.addEventListener('click', () => {
+                            currentIndex = i;
+                            update();
+                            resetAuto();
+                        });
+                        dotsBox.appendChild(dot);
+                    }
+                }
+
+                function update() {
+                    const style = getComputedStyle(rows[0]);
+                    const gap = parseFloat(style.gap) || 0;
+                    const itemW = rows[0].querySelector('.slider-item')
+                        .getBoundingClientRect().width;
+                    const offset = currentIndex * (itemW + gap);
+                    rows.forEach(r => {
+                        r.style.transform = `translateX(${-Math.round(offset)}px)`;
+                    });
+                    // 更新 dots 高亮
+                    dotsBox.querySelectorAll('.slider-dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === currentIndex);
                     });
                 }
 
-                // 滑动到指定位置
-                function goToSlide(index) {
-                    currentSlide = index;
-                    const slideWidth = topRow.querySelector('.slider-item').offsetWidth;
-                    topRow.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-                    bottomRow.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-                    updateDots();
-
-                    // 重置自动滑动计时器
-                    resetAutoSlide();
+                function recalc() {
+                    visibleCols = calcVisibleCols();
+                    const total = rows[0].children.length;
+                    maxIndex = Math.max(0, total - visibleCols);
+                    currentIndex = Math.min(currentIndex, maxIndex);
+                    buildDots();
+                    update();
                 }
 
-                // 下一张
-                function nextSlide() {
-                    currentSlide = (currentSlide + 1) % totalSlides;
-                    goToSlide(currentSlide);
+                function goNext() {
+                    currentIndex = (currentIndex === maxIndex ? 0 : currentIndex + 1);
+                    update();
                 }
 
-                // 上一张
-                function prevSlide() {
-                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                    goToSlide(currentSlide);
+                function goPrev() {
+                    currentIndex = (currentIndex === 0 ? maxIndex : currentIndex - 1);
+                    update();
                 }
 
-                // 自动滑动
-                function startAutoSlide() {
-                    autoSlideInterval = setInterval(nextSlide, 5000); // 每5秒切换一次
+                function startAuto() {
+                    clearInterval(autoSlideTimer);
+                    autoSlideTimer = setInterval(() => {
+                        if (!isDragging) goNext();
+                    }, 3000);
                 }
 
-                // 重置自动滑动
-                function resetAutoSlide() {
-                    clearInterval(autoSlideInterval);
-                    startAutoSlide();
+                function stopAuto() {
+                    clearInterval(autoSlideTimer);
                 }
 
-                // 添加事件监听
-                prevBtn.addEventListener('click', prevSlide);
-                nextBtn.addEventListener('click', nextSlide);
+                function resetAuto() {
+                    stopAuto();
+                    startAuto();
+                }
 
-                // 开始自动滑动
-                startAutoSlide();
-
-                // 鼠标悬停时暂停自动滑动
-                const sliderGallery = document.querySelector('.slider-gallery');
-                sliderGallery.addEventListener('mouseenter', () => {
-                    clearInterval(autoSlideInterval);
+                // 绑定左右按钮
+                prevBtn.addEventListener('click', () => {
+                    goPrev();
+                    resetAuto();
+                });
+                nextBtn.addEventListener('click', () => {
+                    goNext();
+                    resetAuto();
                 });
 
-                sliderGallery.addEventListener('mouseleave', () => {
-                    startAutoSlide();
+                // 鼠标/触摸悬停时暂停
+                gallery.addEventListener('mouseenter', stopAuto);
+                gallery.addEventListener('mouseleave', resetAuto);
+                gallery.addEventListener('touchstart', stopAuto);
+                gallery.addEventListener('touchend', resetAuto);
+
+                // 拖动 handle 时也暂停
+                gallery.querySelectorAll('.twentytwenty-handle').forEach(handle => {
+                    handle.addEventListener('mousedown', () => {
+                        isDragging = true;
+                        stopAuto();
+                    });
+                    handle.addEventListener('touchstart', () => {
+                        isDragging = true;
+                        stopAuto();
+                    });
+                });
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    resetAuto();
+                });
+                document.addEventListener('touchend', () => {
+                    isDragging = false;
+                    resetAuto();
                 });
 
-                // 响应窗口大小变化
-                window.addEventListener('resize', () => {
-                    goToSlide(currentSlide);
-                });
+                window.addEventListener('resize', recalc);
+
+                // 首次启动
+                recalc();
+                startAuto();
+            }
+
+            (async function () {
+                // —— 1）动态扫描并插入 slider-item ——
+                const rowsConfig = [
+                    {
+                        id: 'top-row1',
+                        overlay: 'src/img/RGB1/',
+                        bellow: 'src/img/Label1/',
+                        makeBellow: id => `tile_${id}_color.png`
+                    },
+                    {
+                        id: 'bottom-row1',
+                        overlay: 'src/img/DPT1/',
+                        bellow: 'src/img/Ours1/',
+                        makeBellow: id => `tile_${id}_pred_color.png`
+                    },
+                    {
+                        id: 'top-row2',
+                        overlay: 'src/img/RGB2/',
+                        bellow: 'src/img/Label2/',
+                        makeBellow: id => `tile_${id}_color.png`
+                    },
+                    {
+                        id: 'bottom-row2',
+                        overlay: 'src/img/DPT2/',
+                        bellow: 'src/img/Ours2/',
+                        makeBellow: id => `tile_${id}_pred_color.png`
+                    }
+                ];
+
+                async function scanDir(dir) {
+                    // 假设你已经使用 JSON 清单 或者 服务端 API 返回文件列表
+                    const res = await fetch(dir + 'file.json');
+                    return res.ok ? res.json() : [];
+                }
+
+                for (const cfg of rowsConfig) {
+                    const container = document.getElementById(cfg.id);
+                    if (!container) continue;
+
+                    const files = await scanDir(cfg.overlay);   // e.g. ["tile_131.png", ...]
+                    files.forEach(fname => {
+                        const num = fname.match(/\d+/)[0];
+                        const overlaySrc = cfg.overlay + fname;
+                        const bellowSrc = cfg.bellow + cfg.makeBellow(num);
+                        // ① 在外层声明变量
+                        let label1, label2;
+
+                        // ② 根据路径或 cfg 决定它们的值
+                        if (overlaySrc.includes("RGB")) {
+                            label1 = "RGB";
+                            label2 = "Label";
+                        } else {
+                            label1 = "DPT";
+                            label2 = "Ours";
+                        }
+
+                        const item = document.createElement('div');
+                        item.className = 'slider-item';
+                        item.innerHTML = `
+                        <div class="img-compare-container">
+                          <div class="label input">${label1}</div>
+                          <div class="label ours">${label2}</div>
+                            <div class="img-bellow">
+                              <img class="slider-item-bellow" src="${bellowSrc}">
+                            </div>
+                            <div class="img-overlay">
+                              <img class="slider-item-above" src="${overlaySrc}">
+                            </div>
+                            <div class="twentytwenty-handle">
+                              <span class="twentytwenty-left-arrow"></span>
+                              <span class="twentytwenty-right-arrow"></span>
+                            </div>
+                        </div>`;
+                        container.appendChild(item);
+                    });
+                }
+
+                // —— 2）等待所有新插入的 <img> 真正 load 完 ——
+                let imgs = Array.from(document.querySelectorAll(
+                    '#top-row1 img, #bottom-row1 img'
+                ));
+                await Promise.all(imgs.map(img => new Promise(res => {
+                    if (img.complete && img.naturalHeight !== 0) return res();
+                    img.addEventListener('load', res);
+                    img.addEventListener('error', res);
+                })));
+
+                imgs = Array.from(document.querySelectorAll(
+                    '#top-row2 img, #bottom-row2 img'
+                ));
+                await Promise.all(imgs.map(img => new Promise(res => {
+                    if (img.complete && img.naturalHeight !== 0) return res();
+                    img.addEventListener('load', res);
+                    img.addEventListener('error', res);
+                })));
+
+
+                initImageCompare();
+                // —— 4）再初始化翻页逻辑（每次只移动一个 slide）——
+                document.querySelectorAll('.slider-gallery').forEach(initPagerFor);
+
+                // 重新计算一下
+            })();
+
+            // Paper button click - display a modal message
+            document.querySelector('#custom-btn-paper').addEventListener('click', function () {
+                alert('The paper has not been made public yet');
+            });
+
+            // Dataset Code button click - navigate to the GitHub page
+            document.querySelector('#custom-btn-code').addEventListener('click', function () {
+                window.location.href = 'https://github.com/RS3DBench/RS3DBench';
+            });
+
+            // Our datasets button click - navigate to Hugging Face page
+            document.querySelector('#custom-btn-dataset').addEventListener('click', function () {
+                window.location.href = 'https://huggingface.co/datasets/RS3DBench/RS3DBench';
             });
         });
+
+        function initImageCompare() {
+            document.querySelectorAll('.img-compare-container').forEach(container => {
+                const overlay = container.querySelector('.img-overlay');
+                const handle = container.querySelector('.twentytwenty-handle');
+                if (!overlay || !handle) return;
+
+                // 1. 统一函数：把 overlay 拉到中间，handle 跟上
+                function resetHandle() {
+                    const W = container.clientWidth;
+                    const x = W / 2;
+                    overlay.style.width = x + 'px';
+                    handle.style.left = (x - handle.offsetWidth / 2) + 'px';
+                }
+
+                // 2. 初始置中
+                resetHandle();
+
+                // 3. 窗口 resize 时也要重新置中
+                window.addEventListener('resize', resetHandle);
+
+                // 4. 绑定同一份拖拽逻辑
+                let dragging = false;
+                handle.addEventListener('mousedown', e => {
+                    e.preventDefault();
+                    dragging = true;
+                });
+                handle.addEventListener('touchstart', e => {
+                    e.preventDefault();
+                    dragging = true;
+                });
+                document.addEventListener('mouseup', () => dragging = false);
+                document.addEventListener('touchend', () => dragging = false);
+
+                document.addEventListener('mousemove', onDrag);
+                document.addEventListener('touchmove', onDrag);
+
+                function onDrag(e) {
+                    if (!dragging) return;
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    let offsetX = clientX - container.getBoundingClientRect().left;
+                    offsetX = Math.max(0, Math.min(offsetX, container.clientWidth));
+                    overlay.style.width = offsetX + 'px';
+                    handle.style.left = (offsetX - handle.offsetWidth / 2) + 'px';
+                }
+            });
+        }
     </script>
 </div>
 </body>
