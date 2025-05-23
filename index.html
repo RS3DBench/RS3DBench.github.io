@@ -596,6 +596,21 @@
             border-bottom-right-radius: 16px;
         }
 
+        .related-link {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            text-size-adjust: 100%;
+            font-size: 1em;
+            font-weight: 400;
+            line-height: 1.5;
+            font-family: 'Noto Sans', sans-serif;
+            text-align: justify !important;
+            box-sizing: inherit;
+            color: #3273dc;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
     <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
@@ -759,6 +774,49 @@
         <h2 style="text-align: center; font-size: 2.3em; font-weight: bold; margin: 2.5em 0 0.5em 0; color: #222;">
             BenchMark</h2>
         <img src="src/output1.png" alt="Benchmark Image" class="level3-image">
+    </div>
+    <div class="level2" id="related-links-en" style="padding: 40px 0;">
+        <div>
+            <h2 style="text-align: center; font-size: 2.3em; font-weight: bold; margin: 2.5em 0 0.5em 0; color: #222;">
+                Related Links</h2>
+            <p style="font-size: 1.25em; color: #333; line-height: 1.6; margin-bottom: 1.2em; max-width: 1042px;
+                margin: 0 auto; padding-bottom: 20px; padding-top: 30px; text-align: left">
+                Here are the primary open-source tools, projects, and datasets referenced or utilized in this work. We
+                sincerely acknowledge the authors of these resources, as well as all the works cited in our paper (in no
+                particular order).
+                <br>
+                <br>
+                <a href="https://www.eorc.jaxa.jp/ALOS/en/dataset/aw3d30/aw3d30_e.htm" target="_blank"
+                   class="related-link">ALOS 3D</a>:
+                The AW3D30 global digital elevation model (30 m resolution) provided by JAXA.
+                <br>
+                <br>
+                <a href="https://developers.google.com/earth-engine/datasets/catalog/sentinel-2" target="_blank"
+                   class="related-link">Sentinel-2</a>:
+                Multispectral satellite imagery from the European Space Agency, accessible via Google Earth Engine.
+                <br>
+                <br>
+                <a href="https://developers.google.com/earth-engine/datasets/catalog/Switzerland_SWISSIMAGE_orthos_10cm"
+                   target="_blank" class="related-link">SWISSIMAGE 10 cm RGB</a>: High-resolution (10 cm) orthophotos
+                for Switzerland.
+                <br>
+                <br>
+                <a href="https://www.swisstopo.admin.ch/de/hoehenmodell-swissalti3d" target="_blank"
+                   class="related-link">swissALTI3D</a>:
+                Precise elevation data from the Swiss Federal Office of Topography.
+                <br>
+                <br>
+                <a href="https://developers.google.com/earth-engine/datasets/catalog/AU_GA_AUSTRALIA_5M_DEM"
+                   target="_blank" class="related-link">Australian 5 m DEM</a>: Digital elevation model at 5 m
+                resolution provided by
+                Geoscience Australia.
+                <br>
+                <br>
+                <a href="https://arxiv.org/abs/2312.02145" target="_blank" class="related-link">Marigold</a>: The
+                Marigold depth estimation model, see arXiv:2312.02145.
+
+            </p>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

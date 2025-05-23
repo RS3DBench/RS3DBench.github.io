@@ -5,31 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20585936-870c-443c-a13f-a0c4ce35e334" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/.idea/img.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/RGB/9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/depth/9.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +68,9 @@
       <workItem from="1747362229536" duration="10970000" />
       <workItem from="1747641298524" duration="13149000" />
       <workItem from="1747662216108" duration="774000" />
-      <workItem from="1747706968967" duration="14817000" />
+      <workItem from="1747706968967" duration="16017000" />
+      <workItem from="1747748433487" duration="3891000" />
+      <workItem from="1747790527728" duration="73000" />
     </task>
     <servers />
   </component>
@@ -114,8 +93,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.html</url>
-          <line>936</line>
-          <properties lambdaOrdinal="-1" />
+          <line>994</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
