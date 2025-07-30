@@ -629,6 +629,10 @@
             <i class="fa-brands fa-github"></i>
             Dataset Code
         </button>
+        <button class="custom-btn" id="custom-btn-code-marigold">
+            <i class="fa-brands fa-github"></i>
+            Marigold RS
+        </button>
         <button class="custom-btn" id="custom-btn-dataset">
             <img src="src/huggingface_logo-noborder.svg" width="25" height="25" style="vertical-align:middle;">
             </img>
@@ -1061,6 +1065,11 @@
             // Dataset Code button click - navigate to the GitHub page
             document.querySelector('#custom-btn-code').addEventListener('click', function () {
                 window.location.href = 'https://github.com/RS3DBench/RS3DBench';
+            });
+
+            // Dataset Code button click - navigate to the GitHub page
+            document.querySelector('#custom-btn-code-marigold').addEventListener('click', function () {
+                window.location.href = 'https://github.com/RS3DBench/Marigold-RS';
             });
 
             // Our datasets button click - navigate to Hugging Face page
